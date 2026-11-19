@@ -1,6 +1,6 @@
 // Service worker de Chuleta Beat: guarda la página para usarla sin conexión.
 // Si cambias index.html, sube también el número de VERSION para que se actualice.
-const VERSION = 'chuleta-beat-v1.3.1';
+const VERSION = 'chuleta-beat-v1.3.2';
 const FILES = ['./', 'index.html', 'manifest.webmanifest'];
 
 self.addEventListener('install', (e) => {
@@ -10,7 +10,7 @@ self.addEventListener('install', (e) => {
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
+      .then((keys) => Promise.all(keys.filter((k) => k.startsWith('chuleta-beat-v') && k !== VERSION).map((k) => caches.delete(k))))   // solo las suyas: el dominio lo comparten todas las apps
       .then(() => self.clients.claim())
   );
 });
