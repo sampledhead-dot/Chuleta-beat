@@ -1,6 +1,6 @@
 // Service worker de Chuleta Beat: guarda la página para usarla sin conexión.
 // Si cambias index.html, sube también el número de VERSION para que se actualice.
-const VERSION = 'chuleta-beat-v1.4.0-c2';
+const VERSION = 'chuleta-beat-v1.5.0-c1';
 const FILES = ['./', 'index.html', 'manifest.webmanifest', 'sh-core.js'];
 
 self.addEventListener('install', (e) => {

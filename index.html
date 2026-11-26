@@ -457,40 +457,149 @@ details.rec summary span{opacity:.75;font-size:.88rem}
 header{padding-top:env(safe-area-inset-top,0px)}
 .fpcol{top:calc(4rem + env(safe-area-inset-top,0px))}
 #stage{padding-top:calc(1rem + env(safe-area-inset-top,0px));padding-bottom:calc(1rem + env(safe-area-inset-bottom,0px))}
+
+/* ===== 1.5.0: rediseño (máquina en la cabecera, barra inferior, buscador único, hoja de detalle, Explorar) ===== */
+.top{padding-right:calc(3.6rem + env(safe-area-inset-right,0px));flex-wrap:nowrap}
+.brand{align-items:center;min-width:0}
+.devpick{display:flex;align-items:center;gap:.4rem;background:var(--panel);border:1px solid var(--line);border-radius:.6rem;padding:.3rem .6rem;min-width:0}
+.devpick span{font-weight:800;font-size:.92rem;white-space:nowrap}
+.devpick small{font-size:.62rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.devpick i{font-style:normal;color:var(--acc2);font-size:.75rem}
+.brand .devpick span,.brand .devpick small{border:0;padding:0;border-radius:0}
+.deskfp .oled .of button,.fpmini .oled .of button{display:none}
+.devpick:hover{border-color:var(--acc)}
+.mainnav button{display:flex;align-items:center;gap:.35rem;font-size:.86rem}
+.mainnav button .ic{font-size:1rem}
+.mainnav .n:empty{display:none}
+.mainnav .n{background:var(--acc);color:#000;border-radius:999px;font-size:.62rem;font-weight:800;padding:0 .35rem;margin-left:.1rem}
+@media(max-width:899px){
+  header{backdrop-filter:none;-webkit-backdrop-filter:none;background:var(--bg)}
+  .brand>b{display:none}
+  .devpick small{display:none}
+  .mainnav{position:fixed;left:0;right:0;bottom:0;z-index:40;border-radius:0;border:0;border-top:1px solid var(--line);background:rgba(13,17,23,.97);backdrop-filter:blur(8px);display:grid;grid-template-columns:repeat(4,1fr);padding:.25rem .3rem calc(.3rem + env(safe-area-inset-bottom,0px));gap:.2rem}
+  .mainnav button{flex-direction:column;gap:.05rem;font-size:.68rem;padding:.35rem .1rem;position:relative}
+  .mainnav button .ic{font-size:1.3rem;line-height:1.1}
+  .mainnav .n{position:absolute;top:.15rem;left:56%}
+  main{padding-bottom:5.5rem}
+  footer{padding-bottom:6rem}
+  .toast{bottom:5.2rem}
+}
+@media(min-width:900px){ .brand>b{white-space:nowrap} }
+/* buscador */
+.bhead{display:grid;grid-template-columns:1fr auto;gap:.5rem;align-items:center;margin:.2rem 0 .2rem}
+.search.big{font-size:1.05rem;padding:.85rem 1rem;border-radius:.8rem;border-width:2px}
+.scope button{padding:.35rem .6rem}
+@media(max-width:560px){ .bhead{grid-template-columns:1fr} .bhead .scope{justify-self:start} }
+.blayout{display:grid;gap:1rem}
+.blayout>*{min-width:0}
+@media(min-width:1000px){ .blayout.withfp{grid-template-columns:1fr minmax(24rem,28rem);align-items:start} .blayout.withfp #bres{grid-column:1;grid-row:1} .blayout.withfp .deskfp{grid-column:2;grid-row:1;position:sticky;top:4.2rem;max-height:calc(100vh - 5rem);overflow:auto} }
+.tasks{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,10.5rem),1fr));gap:.55rem}
+.task{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:.9rem;padding:.75rem .8rem;min-height:6rem}
+.task .ti{font-size:1.6rem;line-height:1}
+.task b{font-size:.95rem;line-height:1.2}
+.task small{color:var(--muted);font-size:.72rem;margin-top:auto}
+.task:hover,.task:focus-visible{border-color:var(--acc)}
+.crumb{margin:.4rem 0 .2rem}
+.ctitle{font-size:1.3rem;margin:.4rem 0 .2rem}
+.homelinks{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.4rem 0 .5rem}
+.welcome{background:var(--panel2);border:1px solid var(--acc);border-radius:1rem;padding:.9rem;margin:.2rem 0 1rem}
+.devtiles{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,11rem),1fr));gap:.5rem}
+.devtile{display:flex;flex-direction:column;align-items:flex-start;gap:.15rem;background:var(--panel);border:2px solid var(--line);border-radius:.9rem;padding:.9rem;text-align:left}
+.devtile b{font-size:1.15rem}
+.devtile small{color:var(--muted);font-size:.75rem}
+.devtile[aria-pressed=true]{border-color:var(--acc);background:var(--accd);color:#fff}
+.devtile[aria-pressed=true] small{color:#ffffffcc}
+.nuevo{display:inline-block;background:#facc15;color:#1a1300;border-radius:.35rem;font-size:.62rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:.05rem .35rem;vertical-align:.12em}
+/* teclas con icono */
+kbd.cap{display:inline-flex;align-items:center;gap:.3rem;font-family:inherit;padding:.25rem .5rem}
+kbd.cap i{font-style:normal;font-size:1em}
+kbd.cap small{font-weight:600;font-size:.72em;opacity:.7;text-transform:lowercase}
+kbd.cap b{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-weight:800}
+.card .combo kbd.cap{font-size:.95rem}
+.mini .combo kbd.cap{font-size:.78rem}
+/* tarjeta compacta */
+.card{gap:.3rem}
+.card .meta{align-items:center}
+.card .meta .more{margin-left:auto;color:var(--acc2);font-weight:700;font-size:.78rem}
+.tag.warn{color:var(--warn);border-color:#7c6a1e}
+.pcav{display:none}
+.card:hover{border-color:var(--acc)}
+/* hoja de detalle y de máquina */
+#detail,#devsheet{position:fixed;inset:0;z-index:120;background:rgba(0,0,0,.6);display:flex;align-items:flex-end;justify-content:center}
+@media(min-width:900px){ #detail,#devsheet{align-items:center} }
+body.noscroll{overflow:hidden}
+.dsh{background:var(--bg);border:1px solid var(--line);border-radius:1.1rem 1.1rem 0 0;width:min(100%,44rem);max-height:92vh;overflow:auto;padding:.4rem 1rem calc(1.2rem + env(safe-area-inset-bottom,0px));box-shadow:0 -10px 40px rgba(0,0,0,.5);animation:up .18s ease-out}
+.dsh.small{max-width:34rem}
+@media(min-width:900px){ .dsh{border-radius:1.1rem;max-height:88vh} }
+@keyframes up{from{transform:translateY(24px);opacity:.4}to{transform:none;opacity:1}}
+@media(prefers-reduced-motion:reduce){ .dsh{animation:none} }
+.dtop{position:sticky;top:-.4rem;background:var(--bg);display:flex;justify-content:space-between;align-items:center;gap:.5rem;padding:.6rem 0 .4rem;font-size:.75rem;color:var(--muted);z-index:2}
+.dx{background:var(--panel);border:1px solid var(--line);border-radius:.6rem;font-size:1.1rem;width:2.6rem;height:2.6rem;flex:none}
+.dsh h2{font-size:1.35rem;line-height:1.25;margin:.1rem 0 .7rem}
+.dsteps{list-style:none;margin:0 0 .8rem;padding:0;display:grid;gap:.4rem}
+.dsteps li{display:flex;align-items:center;gap:.6rem;background:var(--panel);border:1px solid var(--line);border-radius:.7rem;padding:.45rem .6rem;transition:border-color .2s,background .2s}
+.dsteps li.on{border-color:var(--acc);background:var(--panel2);box-shadow:0 0 0 1px var(--acc)}
+.dsteps .sn{width:1.6rem;height:1.6rem;border-radius:50%;background:var(--acc);color:#000;font-weight:800;display:grid;place-items:center;font-size:.85rem;flex:none}
+.dsteps kbd.cap{font-size:1.15rem;background:none;border:0;padding:0}
+.dsh .goal{font-size:.98rem;color:#e2e8f0;margin:.3rem 0}
+.dsh .ctx{font-size:.88rem;color:var(--muted);margin:.3rem 0}
+.dsh .cav{margin:.5rem 0}
+.dsh .mh2{font-weight:800;font-size:.75rem;letter-spacing:.06em;text-transform:uppercase;margin:.7rem 0 .2rem;opacity:.75}
+.dsh .dlist{margin:.2rem 0;padding-left:1.2rem;font-size:.9rem}
+.fpmini{max-width:min(100%,24rem);margin:.9rem auto .6rem;pointer-events:none}
+.fpmini .thumbbtn{display:none}
+.dacts{display:flex;flex-wrap:wrap;gap:.45rem;margin:.8rem 0 .4rem}
+.dacts .btn{padding:.55rem .8rem;font-size:.88rem}
+.dacts .btn.on{color:var(--warn);border-color:#7c6a1e}
+.dsh details.more{margin-top:.6rem;border-top:1px dashed var(--line);padding-top:.5rem;font-size:.85rem;color:#cbd5e1}
+.dsh details.more summary{cursor:pointer;color:var(--acc2);font-weight:700}
+.dsh .chk{margin:.3rem 0 0 1.1rem;padding:0}
+.dsh blockquote{margin:.3rem 0 0;padding-left:.6rem;border-left:2px solid var(--line);color:var(--muted);font-style:italic}
+.dsh .mynote,.dsh .noteed textarea{background:#ffe9a0;color:#2b2200;border-radius:.45rem;padding:.45rem .6rem;font-size:.92rem;margin:.4rem 0}
+.dsh .noteed textarea{width:100%;border:1px solid #c9a500;font:inherit}
+/* Explorar */
+.lead.xl{font-size:.95rem;color:var(--text);margin:.1rem 0 .2rem}
+.hint{display:flex;flex-direction:column;gap:.3rem;background:var(--panel2);border:1px dashed var(--line);border-radius:.8rem;padding:.8rem .9rem;margin:0 0 .7rem;font-size:.9rem;color:var(--muted)}
+.hint b{color:var(--text)}
+.hint.on{border-style:solid;border-color:var(--acc)}
+.hint .big kbd.cap{font-size:1.1rem}
+/* recetas */
+.recsteps li{padding:0;background:none}
+.recsteps li::before{top:.7rem;z-index:1}
+.recstep{width:100%;display:grid;gap:.3rem;text-align:left;background:var(--panel2);border:1px solid transparent;border-radius:.6rem;padding:.6rem .6rem .6rem 2.4rem;color:inherit}
+.recstep small{color:var(--acc2);font-weight:700}
+.recstep:hover{border-color:var(--acc)}
+/* escenario: teclas más grandes con icono */
+#stage kbd.cap{gap:.25em}
+#stage .sttop{padding-right:3.6rem}
+#stage kbd.cap small{font-size:.4em}
+@media print{ .pcav{display:block!important} .mainnav,.devpick,#detail,#devsheet,.card .meta .more{display:none!important} }
 </style>
 </head>
 <body>
 <header>
   <div class="wrap top">
-    <div class="brand"><b>Chuleta Beat</b><span id="brandsub">SP-404MKII · v5.50</span></div>
-    <nav role="tablist" aria-label="Vistas">
-      <button role="tab" id="tab-inicio" data-view="inicio" aria-selected="true">Inicio</button>
-      <button role="tab" id="tab-atajos" data-view="atajos" aria-selected="false">Atajos</button>
-      <button role="tab" id="tab-recetas" data-view="recetas" aria-selected="false">Recetas</button>
-      <button role="tab" id="tab-mi-hoja" data-view="mi-hoja" aria-selected="false">Mi hoja<span class="n" id="pincount"></span></button>
-      <button role="tab" id="tab-asistente" data-view="asistente" aria-selected="false">Asistente</button>
-      <button role="tab" id="tab-glosario" data-view="glosario" aria-selected="false">Glosario</button>
+    <div class="brand"><b>Chuleta Beat</b><button class="devpick" id="devpick" data-devpick aria-haspopup="dialog" title="Cambiar de máquina"><span id="devname">SP-404MKII</span><small id="brandsub">manual v5.50</small><i aria-hidden="true">▾</i></button></div>
+    <nav role="tablist" aria-label="Vistas" class="mainnav">
+      <button role="tab" id="tab-buscar" data-view="buscar" aria-selected="true"><span class="ic" aria-hidden="true">🔍</span>Buscar</button>
+      <button role="tab" id="tab-maquina" data-view="maquina" aria-selected="false"><span class="ic" aria-hidden="true">🎛</span>Máquina</button>
+      <button role="tab" id="tab-recetas" data-view="recetas" aria-selected="false"><span class="ic" aria-hidden="true">📋</span>Recetas</button>
+      <button role="tab" id="tab-mi-hoja" data-view="mi-hoja" aria-selected="false"><span class="ic" aria-hidden="true">★</span>Mi hoja<span class="n" id="pincount"></span></button>
     </nav>
-  </div>
-  <div class="wrap devbar" role="tablist" aria-label="Máquina">
-    <button role="tab" data-dev="sp" aria-selected="true">SP-404MKII<small>Roland</small></button>
-    <button role="tab" data-dev="mpc" aria-selected="false">MPC Sample<small>Akai</small></button>
-    <button role="tab" data-dev="move" aria-selected="false">Move<small>Ableton</small></button>
-    <button role="tab" data-dev="ve22" aria-selected="false">VE-22<small>BOSS</small></button>
   </div>
 </header>
 
 <main class="wrap" id="app"></main>
 
-<footer>
+<footer hidden>
   <div class="wrap">
     <p>Chuleta Beat · atajos de la SP-404MKII, la MPC Sample, el Move y la BOSS VE-22 en castellano. Basada en el proyecto de código abierto
       <a href="https://github.com/cntrvsy/sp404mk2cheatsheet" target="_blank" rel="noopener noreferrer">sp404mk2cheatsheet</a>
       de frstudios (licencia MIT).</p>
     <p>Roland, BOSS, SP-404MKII, VE-22, Akai Professional, MPC y Ableton Move son marcas de sus respectivos propietarios. Herramienta educativa independiente y no oficial. Los atajos de la SP-404MKII se verificaron con el manual de referencia v5.50 (más la guía de NearTao para modo DJ, Looper y Sound Generator); los de la MPC Sample se resumieron de la guía de usuario de Akai y los del Move, del manual de Ableton y los de la VE-22, del manual de BOSS, siempre con palabras propias y con indicación del capítulo. Comprueba siempre el firmware: la versión de tu máquina puede variar. Las citas del manual de la SP se mantienen en inglés.</p>
-    <p class="off"><b>Versión 1.4.0</b> · 26 nov 2026</p>
+    <p class="off"><b>Versión 1.5.0</b> · 26 nov 2026</p>
     <p class="off" id="offline" role="status"></p>
-    <details><summary>Novedades</summary><ul class="ver"><li><b>v1.4.0</b> — MPC Sample actualizada a la guía 1.4.0 y notas de versión 1.4: Flatten (Resample Pad), 16 Levels con escalas, grabación en bucle tipo looper, volumen de preescucha, Preview en Step Edit, Usage Monitor, Dev Enhancements (plugins propios, capturas) y fallos conocidos. Dos recetas nuevas y páginas de la guía al día.</li><li><b>v1.3.4</b> — Menú común «☰» de todas las apps de Sampled Head: copia de tus datos, otras apps e informe en el mismo sitio que en las demás.</li><li><b>v1.3.3</b> — Botón «💾 Datos»: guarda o recupera tus favoritos y ajustes (para pasarlos a SampledHead de escritorio u otro navegador).</li><li><b>v1.3.2</b> — Al actualizarse ya no borra los datos guardados de las otras apps de Sampled Head.</li><li><b>v1.3.1</b> — La cabecera y el modo escenario dejan libre la zona de la hora, la batería y la cámara del móvil.</li><li><b>v1.3.0</b> — Ableton Move: artículos de ayuda de Ableton (sampling por USB-C, pistas de audio, Move como interfaz de audio, solución de Control Live, puertos MIDI, Link, autoguardado y lecciones de Melodics).</li><li><b>v1.2.1</b> — Ableton Move: preguntas frecuentes de carga (fuente de 15 W, mínimo 7,5 W por USB-C, no carga por USB-A, cable splitter, comprobar batería y trucos para cargar más rápido).</li><li><b>v1.2.0</b> — Ableton Move actualizado al manual web actual y a las notas de versión hasta Move 2.1.5: pistas de audio, bounce, compás, grabación mono, Link Audio, efectos nuevos, apagado forzado, actualización, MIDI Sync, brillo, 4ths y más. Corregido: el Solo es de la 1.3, no de la 1.4.</li><li><b>v1.1.0</b> — MPC Sample actualizada a la guía 1.3.0 y notas de versión 1.3: Takeover (Pickup, Scaled, Instant), Normalize, actualización de firmware, cable MIDI TRS tipo A, estado de MPC3 y fallo conocido de Flex Beat.</li><li><b>v1.0.0</b> — Primera versión numerada. Cuatro máquinas (SP-404MKII, MPC Sample, Ableton Move, BOSS VE-22), asistente, recetas, modo escenario, notas propias, impresión de Mi hoja y trucos del VE-22 con pedal externo Ampero Switch+ y 26 fichas nuevas del VE-22 de la Guía de parámetros (armonía manual, autotune, efectos, reverb, delay, dinámica, memorias de fábrica).</li></ul></details>
+    <details><summary>Novedades</summary><ul class="ver"><li><b>v1.5.0</b> — Rediseño más intuitivo: eliges la máquina una vez (arriba) y se recuerda; barra de abajo en el móvil (Buscar · Máquina · Recetas · Mi hoja); un solo buscador «¿Qué quieres hacer?» que junta atajos, asistente y recetas; inicio por tareas con las novedades del firmware; tarjetas con teclas e iconos (✋ mantén, 👆 pulsa, 🔄 gira) que abren una hoja con los pasos y la máquina iluminada; pestaña Máquina para explorar botón a botón. Glosario y créditos pasan al menú ☰.</li><li><b>v1.4.0</b> — MPC Sample actualizada a la guía 1.4.0 y notas de versión 1.4: Flatten (Resample Pad), 16 Levels con escalas, grabación en bucle tipo looper, volumen de preescucha, Preview en Step Edit, Usage Monitor, Dev Enhancements (plugins propios, capturas) y fallos conocidos. Dos recetas nuevas y páginas de la guía al día.</li><li><b>v1.3.4</b> — Menú común «☰» de todas las apps de Sampled Head: copia de tus datos, otras apps e informe en el mismo sitio que en las demás.</li><li><b>v1.3.3</b> — Botón «💾 Datos»: guarda o recupera tus favoritos y ajustes (para pasarlos a SampledHead de escritorio u otro navegador).</li><li><b>v1.3.2</b> — Al actualizarse ya no borra los datos guardados de las otras apps de Sampled Head.</li><li><b>v1.3.1</b> — La cabecera y el modo escenario dejan libre la zona de la hora, la batería y la cámara del móvil.</li><li><b>v1.3.0</b> — Ableton Move: artículos de ayuda de Ableton (sampling por USB-C, pistas de audio, Move como interfaz de audio, solución de Control Live, puertos MIDI, Link, autoguardado y lecciones de Melodics).</li><li><b>v1.2.1</b> — Ableton Move: preguntas frecuentes de carga (fuente de 15 W, mínimo 7,5 W por USB-C, no carga por USB-A, cable splitter, comprobar batería y trucos para cargar más rápido).</li><li><b>v1.2.0</b> — Ableton Move actualizado al manual web actual y a las notas de versión hasta Move 2.1.5: pistas de audio, bounce, compás, grabación mono, Link Audio, efectos nuevos, apagado forzado, actualización, MIDI Sync, brillo, 4ths y más. Corregido: el Solo es de la 1.3, no de la 1.4.</li><li><b>v1.1.0</b> — MPC Sample actualizada a la guía 1.3.0 y notas de versión 1.3: Takeover (Pickup, Scaled, Instant), Normalize, actualización de firmware, cable MIDI TRS tipo A, estado de MPC3 y fallo conocido de Flex Beat.</li><li><b>v1.0.0</b> — Primera versión numerada. Cuatro máquinas (SP-404MKII, MPC Sample, Ableton Move, BOSS VE-22), asistente, recetas, modo escenario, notas propias, impresión de Mi hoja y trucos del VE-22 con pedal externo Ampero Switch+ y 26 fichas nuevas del VE-22 de la Guía de parámetros (armonía manual, autotune, efectos, reverb, delay, dinámica, memorias de fábrica).</li></ul></details>
     <details><summary>Versiones de las fuentes</summary><ul class="ver"><li>SP-404MKII: manual de referencia v5.50 y guía de NearTao v0.36.</li><li>MPC Sample: guía de usuario v1.4.0 (RevA) y notas de versión 1.4.</li><li>Ableton Move: manual web actual y notas de versión hasta Move 2.1.5 (14 nov 2026) y artículos de ayuda de Ableton; los atajos de firmware más nuevo llevan aviso.</li><li>BOSS VE-22: manual de referencia y guía de parámetros.</li></ul></details>
     <details><summary>Licencia MIT del proyecto original</summary><pre>MIT License
 
@@ -533,10 +642,10 @@ const fam = id => /^(PAD|Pad|Step|Track|Enc) \d+$/.test(id) ? id.replace(/ \d+$/
 const disp = c => c.replace(/\bLeft\b/g, '◀').replace(/\bRight\b/g, '▶').replace(/\bPlus\b/g, '+').replace(/\bMinus\b/g, '−');
 const DEV_ORDER = ['sp','mpc','move','ve22'];
 const DEVS = {
-  sp:   { name:'SP-404MKII', sub:'SP-404MKII · v5.50', ph:'Busca un atajo (p. ej. stems, choke, one shot, tr-rec, modo dj)…' },
-  mpc:  { name:'MPC Sample', sub:'MPC Sample · guía v1.4', ph:'Busca un atajo (p. ej. chop, note repeat, recall, resample)…' },
-  move: { name:'Move', sub:'Move · manual Ableton', ph:'Busca un atajo (p. ej. nudge, capture, slice, velocity)…' },
-  ve22: { name:'VE-22', sub:'VE-22 · manual BOSS', ph:'Busca un atajo (p. ej. looper, phantom, memoria, bpm tap)…' }
+  sp:   { name:'SP-404MKII', brand:'Roland', sub:'manual v5.50', ph:'¿Qué quieres hacer? (p. ej. cortar un sample, stems, modo dj)' },
+  mpc:  { name:'MPC Sample', brand:'Akai', sub:'guía v1.4', ph:'¿Qué quieres hacer? (p. ej. grabar en bucle, chop, flatten)' },
+  move: { name:'Move', brand:'Ableton', sub:'manual Ableton', ph:'¿Qué quieres hacer? (p. ej. capture, slice, cuantizar)' },
+  ve22: { name:'VE-22', brand:'BOSS', sub:'manual BOSS', ph:'¿Qué quieres hacer? (p. ej. looper, armonía, memoria)' }
 };
 const tips = () => ALL.filter(t => t.dev === state.dev);
 const cats = () => [...new Set(tips().map(t => t.category))];
@@ -548,7 +657,7 @@ const LS = { get(k, d){ try { const v = localStorage.getItem('chuleta.' + k); re
 let notes = LS.get('notes', {}), usage = LS.get('usage', {}), recent = LS.get('recent', []), searches = LS.get('searches', []);
 function touch(id){ usage[id] = (usage[id] || 0) + 1; recent = [id, ...recent.filter(x => x !== id)].slice(0, 12); LS.set('usage', usage); LS.set('recent', recent); }
 const REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-const state = { aq:'', ascope:'dev', dev:'sp', q:'', cat:'ALL', tier:'ALL', btns:[], view:'inicio', anim:-1, noteEd:null, gq:'', sel:null, showFp:true, thumb:false };
+const state = { aq:'', ascope:'dev', dev:(['sp','mpc','move','ve22'].includes(LS.get('dev', 'sp')) ? LS.get('dev', 'sp') : 'sp'), q:'', cat:'ALL', tier:'ALL', btns:[], view:'buscar', anim:-1, noteEd:null, gq:'', sel:null, hov:null, detail:null, showFp:true, thumb:!!LS.get('thumb', false) };
 let pinned = new Set();
 try { pinned = new Set(JSON.parse(localStorage.getItem('chuleta404.pinned') || '[]')); } catch (e) {}
 function savePins(){ try { localStorage.setItem('chuleta404.pinned', JSON.stringify([...pinned])); } catch (e) {} }
@@ -701,38 +810,99 @@ function filtered(extra){
   return extra ? list.filter(extra) : list;
 }
 
-/* ---------- vistas ---------- */
+/* ---------- vistas (1.5.0: tarjetas compactas; el detalle se abre en una hoja) ---------- */
+const VERB = { 'Mantén':['✋','mantén'], 'Pulsa':['👆','pulsa'], 'Toca':['👆','toca'], 'Gira':['🔄','gira'], 'Pisa':['🦶','pisa'] };
+function capHtml(c, on){
+  const m = c.match(/^(Mantén|Pulsa|Gira|Toca|Pisa)\s+(.+)$/), v = m ? VERB[m[1]] : null;
+  return '<kbd class="cap' + (on ? ' on' : '') + '">' + (v ? '<i aria-hidden="true">' + v[0] + '</i><small>' + v[1] + '</small>' : '') + '<b>' + esc(disp(m ? m[2] : c)) + '</b></kbd>';
+}
 function keycaps(t){
-  const all = state.sel === t.id;
-  const dv = state.dev;
-  state.dev = t.dev;
-  const out = t.combo.map((c, i) => (i ? '<span class="pl">+</span>' : '') + '<kbd' + (all || tokenActive(c) ? ' class="on"' : '') + '>' + esc(disp(c)) + '</kbd>').join('');
+  const dv = state.dev; state.dev = t.dev;
+  const out = t.combo.map((c, i) => (i ? '<span class="pl">+</span>' : '') + capHtml(c, tokenActive(c))).join('');
   state.dev = dv;
   return out;
 }
+/* novedades: lo que llegó con el firmware más nuevo que citan las fichas de cada máquina */
+const NEWRX = /^(Nuevo|Requiere|Función|Disponible|Desde|Beta|Lista de problemas)/;
+const vnum = v => v.split('.').map(Number).reduce((a, n, i) => a + n / Math.pow(100, i), 0);
+const NEWV = {};
+ALL.forEach(t => { const c = t.caveat || ''; if (!NEWRX.test(c)) return; const m = c.match(/(?:firmware|Move|versión)\s+(\d+(?:\.\d+)+)/); if (m && (!NEWV[t.dev] || vnum(m[1]) > vnum(NEWV[t.dev]))) NEWV[t.dev] = m[1]; });
+const isNew = t => !!NEWV[t.dev] && NEWRX.test(t.caveat || '') && new RegExp('(firmware|Move|versión)\\s+' + NEWV[t.dev].replace(/\./g, '\\.') + '(?![\\d.])').test(t.caveat);
 function card(t, hideCat, showDev){
-  const p = pinned.has(t.id), n = notes[t.id], ed = state.noteEd === t.id;
-  const more = (t.context ? '<div class="ctx">' + esc(t.context) + '</div>' : '') +
-    (t.steps && t.steps.length ? '<p class="mh2">Paso a paso</p><ol>' + t.steps.map(s => '<li>' + esc(s) + '</li>').join('') + '</ol>' : '') +
-    '<div class="chk"><p class="mh2">¿No te sale? Comprueba</p><ul>' + (t.caveat ? '<li>' + esc(t.caveat) + '</li>' : '') + (CHECKS[t.dev] || []).map(c => '<li>' + esc(c) + '</li>').join('') + '<li>Fuente: ' + esc(t.src) + ' · ' + esc(t.ref) + '</li></ul></div>' +
-    (t.quote ? '<p class="mh2">Cita del manual (en inglés)</p><blockquote>' + esc(t.quote) + '</blockquote>' : '');
-  return '<li><article class="card' + (p ? ' pin' : '') + (state.sel === t.id ? ' sel' : '') + '" data-card="' + t.id + '" tabindex="0">' +
+  const p = pinned.has(t.id), n = notes[t.id];
+  return '<li><article class="card' + (p ? ' pin' : '') + '" data-card="' + t.id + '" tabindex="0" role="button" aria-label="' + esc(t.action) + '">' +
     '<div class="ctop"><div class="combo" aria-label="Combinación de botones">' + keycaps(t) + '</div>' +
     '<button class="star" data-pin="' + t.id + '" aria-pressed="' + p + '" aria-label="' + (p ? 'Quitar de' : 'Fijar en') + ' Mi hoja: ' + esc(t.action) + '">' + (p ? '★' : '☆') + '</button></div>' +
-    '<h3>' + esc(t.action) + '</h3>' +
+    '<h3>' + (isNew(t) ? '<span class="nuevo">Nuevo ' + esc(NEWV[t.dev]) + '</span> ' : '') + esc(t.action) + '</h3>' +
     '<p class="goal">' + esc(t.goal) + '</p>' +
-    (t.caveat ? '<p class="cav">⚠ ' + esc(t.caveat) + '</p>' : '') +
-    (n && !ed ? '<p class="mynote">✎ ' + esc(n) + '</p>' : '') +
-    (ed ? '<div class="noteed"><textarea id="ned" rows="3" maxlength="400" placeholder="Tu nota para este atajo…">' + esc(n || '') + '</textarea><div class="row"><button class="btn pri" data-notesave="' + t.id + '">Guardar nota</button><button class="btn" data-notecancel>Cancelar</button></div></div>' : '') +
-    '<details class="more"><summary>Detalles y ayuda</summary>' + more + '</details>' +
-    '<div class="meta">' + (showDev ? '<span class="tag">' + esc(DEVS[t.dev].name) + '</span>' : '') + (hideCat ? '' : '<button class="tag chip" data-cat="' + esc(t.category) + '">' + esc(t.category) + '</button>') +
-    '<span class="tag">' + (t.tier === 'essential' ? 'Esencial' : 'A fondo') + '</span><span class="tag">' + esc(t.ref) + '</span>' +
-    '<span class="acts"><button class="btn" data-note="' + t.id + '">✎ Nota</button><button class="btn" data-stage="' + t.id + '">Escenario</button></span></div>' +
+    (t.caveat ? '<p class="cav pcav">⚠ ' + esc(t.caveat) + '</p>' : '') +
+    (n ? '<p class="mynote">✎ ' + esc(n) + '</p>' : '') +
+    '<div class="meta">' + (showDev ? '<span class="tag">' + esc(DEVS[t.dev].name) + '</span>' : '') + (hideCat ? '' : '<span class="tag">' + esc(t.category) + '</span>') +
+    (t.caveat ? '<span class="tag warn">⚠ ojo</span>' : '') + '<span class="more">Ver cómo ›</span></div>' +
     '</article></li>';
 }
 
+/* ---------- hoja de detalle de un atajo ---------- */
+function miniFp(t){
+  const dv = state.dev; state.dev = t.dev;
+  const h = FPS[t.dev](0);
+  state.dev = dv;
+  return h;
+}
+function detailHtml(){
+  const t = ALL.find(x => x.id === state.detail); if (!t) return '';
+  const p = pinned.has(t.id), n = notes[t.id], ed = state.noteEd === t.id, k = state.anim;
+  const dv = state.dev; state.dev = t.dev;
+  const steps = t.combo.map((c, i) => '<li data-step="' + i + '"' + (k === i || (k < 0 && t.combo.length === 1) ? ' class="on"' : '') + '><span class="sn">' + (i + 1) + '</span>' + capHtml(c, false) + '</li>').join('');
+  state.dev = dv;
+  return '<div class="dsh" role="document">' +
+    '<div class="dtop"><span>' + esc(DEVS[t.dev].name) + ' · ' + esc(t.category) + '</span><button class="dx" data-detclose aria-label="Cerrar">✕</button></div>' +
+    '<h2>' + (isNew(t) ? '<span class="nuevo">Nuevo ' + esc(NEWV[t.dev]) + '</span> ' : '') + esc(t.action) + '</h2>' +
+    '<ol class="dsteps" aria-label="Pasos">' + steps + '</ol>' +
+    '<p class="goal">' + esc(t.goal) + '</p>' +
+    (t.context ? '<p class="ctx">' + esc(t.context) + '</p>' : '') +
+    (t.caveat ? '<p class="cav">⚠ ' + esc(t.caveat) + '</p>' : '') +
+    (t.steps && t.steps.length ? '<p class="mh2">Paso a paso</p><ol class="dlist">' + t.steps.map(s => '<li>' + esc(s) + '</li>').join('') + '</ol>' : '') +
+    '<div class="fpmini" id="fpmini" inert aria-hidden="true">' + miniFp(t) + '</div>' +
+    (n && !ed ? '<p class="mynote">✎ ' + esc(n) + '</p>' : '') +
+    (ed ? '<div class="noteed"><textarea id="ned" rows="3" maxlength="400" placeholder="Tu nota para este atajo…">' + esc(n || '') + '</textarea><div class="row"><button class="btn pri" data-notesave="' + t.id + '">Guardar nota</button><button class="btn" data-notecancel>Cancelar</button></div></div>' : '') +
+    '<div class="dacts"><button class="btn' + (p ? ' on' : '') + '" data-pin="' + t.id + '" aria-pressed="' + p + '">' + (p ? '★ En Mi hoja' : '☆ Fijar en Mi hoja') + '</button>' +
+    '<button class="btn" data-note="' + t.id + '">✎ Nota</button><button class="btn" data-stage="' + t.id + '">Escenario</button>' +
+    '<button class="btn pri" data-onfp="' + t.id + '">Ver en la máquina</button></div>' +
+    '<details class="more"><summary>¿No te sale? Comprueba</summary><ul class="chk">' + (CHECKS[t.dev] || []).map(c => '<li>' + esc(c) + '</li>').join('') + '<li>Fuente: ' + esc(t.src) + ' · ' + esc(t.ref) + '</li></ul>' +
+    (t.quote ? '<p class="mh2">Cita del manual (en inglés)</p><blockquote>' + esc(t.quote) + '</blockquote>' : '') + '</details>' +
+    '</div>';
+}
+let detFocus = null;
+function openDetail(id){
+  if (!ALL.find(t => t.id === id)) return;
+  if (!state.detail) detFocus = document.activeElement;
+  state.detail = id; state.sel = id; state.noteEd = null; touch(id);
+  let el = $('#detail');
+  if (!el) { el = document.createElement('div'); el.id = 'detail'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); document.body.appendChild(el); document.body.classList.add('noscroll'); }
+  drawDetail();
+  const x = el.querySelector('.dx'); if (x) x.focus();
+  syncAnim(); drawFps();
+}
+function drawDetail(){
+  const el = $('#detail'); if (!el || !state.detail) return;
+  const t = ALL.find(x => x.id === state.detail);
+  el.dataset.dev = t.dev; el.setAttribute('aria-label', t.action);
+  const sc = el.querySelector('.dsh') ? el.querySelector('.dsh').scrollTop : 0;
+  el.innerHTML = detailHtml();
+  el.querySelector('.dsh').scrollTop = sc;
+}
+function closeDetail(){
+  const el = $('#detail'); if (el) el.remove();
+  document.body.classList.remove('noscroll');
+  state.detail = null; state.noteEd = null;
+  if (state.view !== 'maquina') state.sel = null;
+  syncAnim(); drawFps();
+  try { if (detFocus && detFocus.focus) detFocus.focus(); } catch (e) {}
+}
+
 /* ---------- panel visual de la máquina ---------- */
-const selTip = () => state.sel ? ALL.find(t => t.id === state.sel) : null;
+const selTip = () => { const id = state.sel || state.hov; return id ? ALL.find(t => t.id === id) : null; };
 const hi = () => {
   const t = selTip();
   if (!t) return state.btns;
@@ -746,9 +916,10 @@ const hi = () => {
   return t.buttons;
 };
 let animTimer = null, animFor = null;
+function animTarget(){ return state.detail || (state.view === 'maquina' ? state.sel : null); }
 function syncAnim(){
-  const t = selTip();
-  if (!t || state.view !== 'atajos' || REDUCED || t.combo.length < 2) {
+  const id = animTarget(), t = id ? ALL.find(x => x.id === id) : null;
+  if (!t || REDUCED || t.combo.length < 2) {
     if (animTimer) { clearInterval(animTimer); animTimer = null; }
     animFor = null; state.anim = -1; return;
   }
@@ -756,11 +927,25 @@ function syncAnim(){
     if (animTimer) clearInterval(animTimer);
     animFor = t.id; state.anim = 0;
     animTimer = setInterval(() => {
-      const tt = selTip(); if (!tt || !$('#fpbox')) return;
+      const tt = ALL.find(x => x.id === animTarget()); if (!tt) return;
       state.anim = (state.anim + 1) % (tt.combo.length + 1);
-      $('#fpbox').innerHTML = fp(state._n || 0);
+      animPaint(tt);
     }, 1300);
   }
+}
+function animPaint(t){
+  const m = $('#fpmini');
+  if (m && state.detail) {
+    const keep = state.sel; state.sel = state.detail; m.innerHTML = miniFp(t); state.sel = keep;
+    document.querySelectorAll('#detail .dsteps li').forEach(li => li.classList.toggle('on', Number(li.dataset.step) === state.anim));
+  }
+  if (state.view === 'maquina' && $('#fpbox')) $('#fpbox').innerHTML = fp(state._n || 0);
+}
+/* redibuja los paneles grandes (Máquina y la columna del buscador en el ordenador) */
+function drawFps(){
+  const b = $('#fpbox'); if (!b) return;
+  if (state.view === 'maquina') b.innerHTML = fp(state._n || 0);
+  else if (state.view === 'buscar' && !b.hidden) b.innerHTML = fp(0);
 }
 const isOn = (H, id) => H.some(h => same(h, id)) || (id !== 'BANK' && id.startsWith('BANK ') && H.includes('BANK'));
 function mk(H){
@@ -867,44 +1052,116 @@ function fpVE(count){
 const FPS = { sp:fpSP, mpc:fpMPC, move:fpMove, ve22:fpVE };
 const fp = count => '<div class="fpscroll">' + FPS[state.dev](count) + '</div>';
 
-function chipsHtml(){
-  return '<button class="chip" data-cat="ALL" aria-pressed="' + (state.cat === 'ALL') + '">Todos (' + tips().length + ')</button>' +
-    cats().map(c => '<button class="chip" data-cat="' + esc(c) + '" aria-pressed="' + (state.cat === c) + '">' + esc(c) + '</button>').join('');
+/* ---------- Buscar (inicio + buscador único) ---------- */
+const CATICON = [[/grab|sampling|captur/i,'🎙'],[/chop|edit|trim|cort/i,'✂️'],[/secuen|pattern|patr|notas y|step/i,'🎛'],[/fx|efect|harmony/i,'✨'],[/tono|pitch/i,'🎵'],[/mezcl|mix/i,'🎚'],[/loop|looper|clip/i,'🔁'],[/pedal/i,'🦶'],[/memori|banco|proyect|sets|menú|sistema/i,'⚙️'],[/live/i,'💻'],[/pad|reproduc/i,'🥁']];
+const catIcon = c => (CATICON.find(([r]) => r.test(c)) || [0, '•'])[1];
+function minis(list){ return '<ul class="minis">' + list.map(t => '<li><button class="mini" data-goto="' + t.id + '"><span class="combo">' + keycaps(t) + '</span><b>' + (isNew(t) ? '<span class="nuevo">Nuevo</span> ' : '') + esc(t.action) + '</b></button></li>').join('') + '</ul>'; }
+function devWelcome(){
+  return '<section class="welcome"><h1>¿Qué máquina tienes delante?</h1><p class="lead">Elígela una vez y la app la recordará. Puedes cambiarla cuando quieras tocando su nombre arriba.</p>' + devTiles() + '</section>';
 }
-function toolbar(n){
-  return '<div class="row"><div class="seg" role="group" aria-label="Nivel">' +
-    [['ALL','Todos'],['essential','Esenciales'],['deep-dive','A fondo']].map(([v, l]) => '<button data-tier="' + v + '" aria-pressed="' + (state.tier === v) + '">' + l + '</button>').join('') +
-    '</div><span class="count">' + n + ' ' + (n === 1 ? 'atajo' : 'atajos') + '</span>' +
-    (state.q || state.cat !== 'ALL' || state.tier !== 'ALL' || state.btns.length ? '<button class="btn" data-reset>Borrar filtros</button>' : '') + '</div>';
+function devTiles(){
+  return '<div class="devtiles">' + DEV_ORDER.map(d => '<button class="devtile" data-dev="' + d + '" aria-pressed="' + (d === state.dev) + '"><b>' + esc(DEVS[d].name) + '</b><small>' + esc(DEVS[d].brand) + ' · ' + ALL.filter(t => t.dev === d).length + ' atajos</small></button>').join('') + '</div>';
 }
-function viewAtajos(){
-  return '<div class="layout" id="layout"><div class="top2"><label class="vh" for="q">Buscar atajos</label><input id="q" class="search" type="search" placeholder="' + esc(DEVS[state.dev].ph) + '" value="' + esc(state.q) + '" autocomplete="off">' +
-    '<div class="chips" id="chips" role="group" aria-label="Categorías"></div><div class="row" style="margin:.3rem 0 0"><button class="btn" id="fptoggle" data-fptoggle></button></div></div>' +
-    '<aside class="fpcol" id="fpbox"></aside><div class="resc"><div id="toolbar"></div><div id="results"></div></div></div>';
+function viewBuscar(){
+  const first = !LS.get('dev', null);
+  return (first ? devWelcome() : '') +
+    '<div class="bhead"><label class="vh" for="bq">Qué quieres hacer</label><input id="bq" class="search big" type="search" enterkeyhint="search" placeholder="' + esc(DEVS[state.dev].ph) + '" value="' + esc(state.aq) + '" autocomplete="off">' +
+    '<div class="seg scope" role="group" aria-label="Dónde buscar"><button data-ascope="dev" aria-pressed="' + (state.ascope === 'dev') + '">' + esc(DEVS[state.dev].name) + '</button><button data-ascope="all" aria-pressed="' + (state.ascope === 'all') + '">Todas</button></div></div>' +
+    '<div class="blayout" id="blayout"><aside class="fpcol deskfp" id="fpbox" hidden></aside><div id="bres"></div></div>';
+}
+function bresHtml(){
+  if (state.aq.trim()) return bSearch();
+  if (state.cat !== 'ALL') return bCategory();
+  return bHome();
+}
+function bHome(){
+  const L = tips(), byId = id => L.find(t => t.id === id);
+  const cs = cats();
+  let top = Object.entries(usage).map(([id, n]) => [byId(id), n]).filter(x => x[0]).sort((a, b) => b[1] - a[1]).slice(0, 4).map(x => x[0]);
+  const learned = top.length >= 3;
+  if (!learned) top = L.filter(t => t.tier === 'essential').slice(0, 4);
+  const rec = recent.map(byId).filter(Boolean).slice(0, 4);
+  const nw = L.filter(isNew);
+  const recs = RECIPES.filter(r => r.dev === state.dev);
+  const rs = searches.slice(0, 5).map(x => '<button class="chip" data-aex="' + esc(x) + '">↺ ' + esc(x) + '</button>').join('');
+  return (rs ? '<div class="chips" aria-label="Búsquedas recientes">' + rs + '</div>' : '<div class="chips" aria-label="Ejemplos">' + AEX[state.dev].map(x => '<button class="chip" data-aex="' + esc(x) + '">' + esc(x) + '</button>').join('') + '</div>') +
+    '<h2 class="sect">¿Qué quieres hacer?</h2><div class="tasks">' + cs.map(c => '<button class="task" data-cat="' + esc(c) + '"><span class="ti" aria-hidden="true">' + catIcon(c) + '</span><b>' + esc(c) + '</b><small>' + L.filter(t => t.category === c).length + ' atajos</small></button>').join('') + '</div>' +
+    (nw.length ? '<h2 class="sect">Novedades del firmware ' + esc(NEWV[state.dev]) + ' <small>' + nw.length + '</small></h2>' + minis(nw.slice(0, 6)) + (nw.length > 6 ? '<p><button class="btn" data-shownew>Ver las ' + nw.length + ' novedades</button></p>' : '') : '') +
+    '<h2 class="sect">' + (learned ? 'Tus más usados' : 'Esenciales para empezar') + '</h2>' + minis(top) +
+    (rec.length ? '<h2 class="sect">Vistos hace poco</h2>' + minis(rec) : '') +
+    (recs.length ? '<h2 class="sect">Recetas paso a paso</h2><ul class="minis">' + recs.slice(0, 4).map(r => '<li><button class="mini" data-recipe="' + r.id + '"><b>📋 ' + esc(r.title) + '</b><small>' + esc(r.desc) + '</small></button></li>').join('') + '</ul>' + (recs.length > 4 ? '<p><button class="btn" data-view="recetas">Ver las ' + recs.length + ' recetas</button></p>' : '') : '') +
+    '<div class="homelinks"><button class="btn" data-stagesheet>🎤 Modo escenario (Mi hoja)</button><button class="btn" data-view="glosario">📖 Glosario</button><button class="btn" data-view="info">ℹ Acerca de y novedades</button></div>';
+}
+function bCategory(){
+  const list = state.cat === '__new' ? tips().filter(isNew) : tips().filter(t => t.category === state.cat && (state.tier === 'ALL' || t.tier === state.tier));
+  state._n = list.length; state._first = list[0] ? list[0].id : null;
+  const title = state.cat === '__new' ? 'Novedades del firmware ' + (NEWV[state.dev] || '') : state.cat;
+  return '<div class="crumb"><button class="btn" data-cat="ALL">‹ Todas las tareas</button></div><h2 class="ctitle"><span aria-hidden="true">' + (state.cat === '__new' ? '🆕' : catIcon(state.cat)) + '</span> ' + esc(title) + '</h2>' +
+    (state.cat === '__new' ? '' : '<div class="row"><div class="seg" role="group" aria-label="Nivel">' + [['ALL','Todos'],['essential','Esenciales'],['deep-dive','A fondo']].map(([v, l]) => '<button data-tier="' + v + '" aria-pressed="' + (state.tier === v) + '">' + l + '</button>').join('') + '</div><span class="count">' + list.length + ' ' + (list.length === 1 ? 'atajo' : 'atajos') + '</span></div>') +
+    '<ul class="grid">' + list.map(t => card(t, true)).join('') + '</ul>';
+}
+function bSearch(){
+  const q = state.aq.trim();
+  const scope = state.ascope === 'all' ? 'all' : state.dev;
+  const parts = q.split(/\s*(?:,|;|\by luego\b|\by después\b|\by despues\b|\bluego\b|\bdespués\b|\bdespues\b|\bpara luego\b)\s*/i).filter(x => x.trim());
+  const qw = words(q).filter(w => !STOP.has(w) && !FILLER.has(w) && w.length > 3);
+  const recs = RECIPES.filter(r => (scope === 'all' || r.dev === scope) && qw.some(w => norm(r.title + ' ' + r.desc).includes(stem(w)))).slice(0, 3);
+  const recHtml = recs.length ? '<h2 class="sect">Recetas</h2><ul class="minis">' + recs.map(r => '<li><button class="mini" data-recipe="' + r.id + '" data-recdev="' + r.dev + '"><b>📋 ' + esc(r.title) + '</b><small>' + esc(r.desc) + (scope === 'all' ? ' · ' + esc(DEVS[r.dev].name) : '') + '</small></button></li>').join('') + '</ul>' : '';
+  let any = false, html = '', firstId = null;
+  parts.forEach((pt, i) => {
+    const r = smartSearch(pt, scope).slice(0, parts.length > 1 ? 3 : 10);
+    if (!r.length) return; any = true; if (!firstId) firstId = r[0].t.id;
+    html += (parts.length > 1 ? '<h2 class="sect">' + (i + 1) + '. ' + esc(pt) + '</h2>' : '<h2 class="sect">Atajos <small>' + r.length + '</small></h2>') +
+      '<ul class="grid">' + r.map((x, j) => { let h = card(x.t, false, state.ascope === 'all'); if (j === 0 && parts.length === 1) h = h.replace('class="card', 'class="card tophit').replace('<h3>', '<p class="besttag">Mejor coincidencia</p><h3>'); return h; }).join('') + '</ul>';
+  });
+  state._first = firstId;
+  if (!any) {
+    const dm = didYouMean(q);
+    return recHtml + '<div class="empty"><h3>No he encontrado nada parecido</h3>' + (dm.length ? '<p>¿Quisiste decir?</p><div class="chips">' + dm.map(([w, v]) => '<button class="chip" data-aex="' + esc(q.replace(new RegExp(w, 'i'), v)) + '">' + esc(w) + ' → ' + esc(v) + '</button>').join('') + '</div>' : '<p>Prueba con otras palabras («borrar», «copiar», «volumen», «grabar»), busca en todas las máquinas o explora la pestaña Máquina.</p>') + '</div>';
+  }
+  return recHtml + html;
+}
+
+/* ---------- Máquina (modo Explorar) ---------- */
+function viewMaquina(){
+  return '<div class="layout" id="layout"><div class="top2"><h1 class="vh">Explorar la máquina</h1><p class="lead xl">Toca un botón del dibujo para ver qué hace y qué atajos lo usan. Mantén SHIFT para ver las funciones secundarias.</p></div>' +
+    '<aside class="fpcol" id="fpbox"></aside><div class="resc"><div id="explain"></div><div id="results"></div></div></div>';
+}
+function subLabel(id){
+  const b = document.querySelector('#fpbox [data-btn="' + (window.CSS && CSS.escape ? CSS.escape(id) : id) + '"]'); if (!b) return '';
+  const s = b.querySelector('small,i') || (b.parentElement && b.parentElement.querySelector('.sl i, .sl'));
+  const tx = s ? s.textContent.replace(/^\d+/, '').trim() : '';
+  return tx && tx !== disp(id) ? tx : '';
+}
+function explainHtml(list){
+  if (!state.btns.length) return '<div class="hint"><b>👆 Toca cualquier botón, pad o knob del dibujo.</b><span>Verás su función con SHIFT y todos los atajos en los que se usa. Toca varios para combinarlos.</span></div>';
+  const one = state.btns.length === 1 ? subLabel(state.btns[0]) : '';
+  return '<div class="hint on"><div class="row" style="margin:0"><b class="big">' + state.btns.map(b => '<kbd class="cap"><b>' + esc(disp(b)) + '</b></kbd>').join('<span class="pl">+</span>') + '</b><button class="btn" data-clearsel>Borrar</button></div>' +
+    (one ? '<span>Con SHIFT: <b>' + esc(one) + '</b></span>' : '') +
+    '<span>' + (list.length ? list.length + ' ' + (list.length === 1 ? 'atajo lo usa' : 'atajos lo usan') : 'Ningún atajo usa esta combinación: prueba a quitar un botón.') + '</span></div>';
 }
 function update(){
   document.documentElement.dataset.dev = state.dev;
+  $('#devname').textContent = DEVS[state.dev].name;
   $('#brandsub').textContent = DEVS[state.dev].sub;
-  document.querySelectorAll('.devbar [role=tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.dev === state.dev)));
-  $('#pincount').textContent = pinned.size ? ' ' + pinned.size : '';
+  document.querySelectorAll('nav [role=tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === state.view)));
+  $('#pincount').textContent = pinned.size ? String(pinned.size) : '';
   syncAnim();
-  if (state.view !== 'atajos' || !$('#layout')) return;
-  const list = filtered();
-  state._n = list.length;
-  const grouped = state.cat === 'ALL' && !state.q.trim() && !state.btns.length;
-  $('#chips').innerHTML = chipsHtml();
-  $('#fptoggle').textContent = state.showFp ? 'Ocultar panel de la máquina' : 'Mostrar panel de la máquina';
-  $('#layout').classList.toggle('nofp', !state.showFp);
-  $('#fpbox').hidden = !state.showFp;
-  $('#fpbox').innerHTML = state.showFp ? fp(list.length) : '';
-  $('#toolbar').innerHTML = toolbar(list.length);
-  $('#results').innerHTML = results(list, grouped);
-}
-function results(list, grouped){
-  if (!list.length) return '<div class="empty"><h3>No se han encontrado atajos</h3><p>Prueba a quitar algún botón del filtro o a buscar con otras palabras.</p></div>';
-  if (grouped) return cats().map(c => { const items = list.filter(t => t.category === c); return items.length ? '<h2 class="sect">' + esc(c) + ' <small>' + items.length + '</small></h2><ul class="grid">' + items.map(t => card(t, true)).join('') + '</ul>' : ''; }).join('');
-  const first = state.btns.length || state.q.trim();
-  return '<ul class="grid">' + list.map((t, i) => { let h = card(t, state.cat !== 'ALL'); if (first && i === 0) h = h.replace('class="card', 'class="card tophit').replace('<details class="more">', '<details class="more" open>').replace('<h3>', '<p class="besttag">Mejor coincidencia</p><h3>'); return h; }).join('') + '</ul>';
+  if (state.view === 'buscar' && $('#bres')) {
+    $('#bres').innerHTML = bresHtml();
+    const box = $('#fpbox'), wide = window.matchMedia && matchMedia('(min-width:1000px)').matches;
+    const show = wide && (state.aq.trim() || state.cat !== 'ALL') && !!(state._first || state.hov);
+    box.hidden = !show; $('#blayout').classList.toggle('withfp', !!show);
+    if (show) { if (!state.hov || !ALL.find(t => t.id === state.hov && t.dev === state.dev)) state.hov = state._first; box.innerHTML = fp(0); }
+  }
+  if (state.view === 'maquina' && $('#layout')) {
+    const list = state.btns.length ? filtered() : [];
+    state._n = list.length;
+    $('#fpbox').innerHTML = fp(tips().length);
+    $('#explain').innerHTML = explainHtml(list);
+    $('#results').innerHTML = list.length ? '<ul class="grid">' + list.map(t => card(t, false)).join('') + '</ul>' : '';
+  }
+  if (state.detail) drawDetail();
 }
 function sheetText(){
   return 'Chuleta Beat — Mi hoja\n\n' + DEV_ORDER.map(d => {
@@ -914,9 +1171,9 @@ function sheetText(){
 }
 function viewSheet(){
   const mine = ALL.filter(t => pinned.has(t.id));
-  let html = '<h1>Mi hoja de estudio</h1><p class="lead">Tus atajos fijados de las tres máquinas. Pulsa <b>★ Fijado</b> en una tarjeta para quitarla. Se guardan en este dispositivo.</p>';
+  let html = '<h1>Mi hoja</h1><p class="lead">Tus atajos fijados de todas las máquinas. Toca ★ en una tarjeta para quitarla. Se guardan en este dispositivo.</p>';
   if (!mine.length) {
-    return html + '<div class="empty"><h3>Tu hoja está vacía</h3><p>Fija atajos con la estrella desde la pestaña «Atajos», o empieza con un kit de esenciales:</p><div class="kits">' +
+    return html + '<div class="empty"><h3>Tu hoja está vacía</h3><p>Fija atajos con la estrella ☆ desde Buscar o Máquina, o empieza con un kit de esenciales:</p><div class="kits">' +
       '<button class="btn pri" data-kit="sp:essentials">SP-404MKII (12)</button>' +
       '<button class="btn pri" data-kit="mpc:essentials">MPC Sample (12)</button>' +
       '<button class="btn pri" data-kit="move:essentials">Move (12)</button>' +
@@ -924,7 +1181,7 @@ function viewSheet(){
       '<button class="btn" data-kit="sp:chop">SP: edición y chop</button>' +
       '<button class="btn" data-kit="sp:fx">SP: FX y ruteo</button></div></div>';
   }
-  html += '<div class="row"><span class="count">' + mine.length + ' ' + (mine.length === 1 ? 'atajo' : 'atajos') + '</span><span><button class="btn pri" data-copy>Copiar lista</button> <button class="btn" data-print>Imprimir / PDF</button> <button class="btn dng" data-clear>Vaciar hoja</button></span></div>';
+  html += '<div class="row"><span class="count">' + mine.length + ' ' + (mine.length === 1 ? 'atajo' : 'atajos') + '</span><span><button class="btn pri" data-stagesheet>🎤 Escenario</button> <button class="btn" data-copy>Copiar lista</button> <button class="btn" data-print>Imprimir / PDF</button> <button class="btn dng" data-clear>Vaciar hoja</button></span></div>';
   return html + DEV_ORDER.map(d => { const m = mine.filter(t => t.dev === d); return m.length ? '<h2 class="sect">' + esc(DEVS[d].name) + ' <small>' + m.length + '</small></h2><ul class="grid">' + m.map(t => card(t, false)).join('') + '</ul>' : ''; }).join('');
 }
 const gitems = () => { const q = norm(state.gq.trim()); return GLOSSARY.filter(e => e.dev === state.dev).sort((a, b) => a.term.localeCompare(b.term, 'es')).filter(e => !q || norm(e.term + ' ' + (e.original || '') + ' ' + e.text).includes(q)); };
@@ -942,35 +1199,6 @@ function didYouMean(q){
   words(q).forEach(w => { if (w.length < 4 || STOP.has(w) || FILLER.has(w) || VOC.includes(w)) return; let best = null, bd = 3; VOC.forEach(v => { const d = lev(w, v); if (d < bd) { bd = d; best = v; } }); if (best) out.push([w, best]); });
   return out;
 }
-function viewAsistente(){
-  const ex = AEX[state.dev].map(x => '<button class="chip" data-aex="' + esc(x) + '">' + esc(x) + '</button>').join('');
-  const rs = searches.map(x => '<button class="chip" data-aex="' + esc(x) + '">↺ ' + esc(x) + '</button>').join('');
-  return '<h1>Asistente</h1><p class="lead">Escribe con tus palabras qué quieres hacer. Para varios pasos, sepáralos con «luego» o con comas.</p>' +
-    '<label class="vh" for="aq">Qué quieres hacer</label><input id="aq" class="search" type="search" placeholder="Ej.: grabar un sample, luego cortarlo…" value="' + esc(state.aq) + '" autocomplete="off" style="margin-bottom:.6rem">' +
-    '<div class="row" style="margin:.2rem 0 .6rem"><div class="seg" role="group" aria-label="Dónde buscar"><button data-ascope="dev" aria-pressed="' + (state.ascope === 'dev') + '">' + esc(DEVS[state.dev].name) + '</button><button data-ascope="all" aria-pressed="' + (state.ascope === 'all') + '">Todas las máquinas</button></div></div>' +
-    '<div class="chips" aria-label="Ejemplos">' + ex + '</div>' + (rs ? '<div class="chips" aria-label="Búsquedas recientes" style="margin-top:.3rem">' + rs + '</div>' : '') + '<div id="aresults" style="margin-top:.8rem">' + aresults() + '</div>';
-}
-function aresults(){
-  const q = state.aq.trim();
-  if (!q) return '<p class="count">Prueba con un ejemplo de arriba o escribe lo tuyo.</p>';
-  const scope = state.ascope === 'all' ? 'all' : state.dev;
-  const parts = q.split(/\s*(?:,|;|\by luego\b|\by después\b|\by despues\b|\bluego\b|\bdespués\b|\bdespues\b|\bpara luego\b)\s*/i).filter(x => x.trim());
-  const nq = norm(q);
-  const recs = RECIPES.filter(r => (scope === 'all' || r.dev === scope) && words(q).filter(w => !STOP.has(w) && !FILLER.has(w) && w.length > 3).some(w => norm(r.title + ' ' + r.desc).includes(stem(w)))).slice(0, 3);
-  const recHtml = recs.length ? '<p class="count">Recetas relacionadas:</p><div class="chips">' + recs.map(r => '<button class="chip" data-recipe="' + r.id + '" data-recdev="' + r.dev + '">📋 ' + esc(r.title) + '</button>').join('') + '</div>' : '';
-  let any = false, html = '';
-  parts.forEach((pt, i) => {
-    const r = smartSearch(pt, scope).slice(0, parts.length > 1 ? 3 : 8);
-    if (!r.length) return; any = true;
-    html += (parts.length > 1 ? '<h2 class="sect">' + (i + 1) + '. ' + esc(pt) + '</h2>' : '<p class="count">' + (r.length === 1 ? 'Esto es lo que mejor encaja:' : 'Lo que mejor encaja, de más a menos:') + '</p>') +
-      '<ul class="grid">' + r.map(x => card(x.t, true, state.ascope === 'all').replace('</article>', '<div class="meta"><button class="btn" data-goto="' + x.t.id + '">Ver en el panel</button></div></article>')).join('') + '</ul>';
-  });
-  if (!any) {
-    const dm = didYouMean(q);
-    return recHtml + '<div class="empty"><h3>No he encontrado nada parecido</h3>' + (dm.length ? '<p>¿Quisiste decir?</p><div class="chips">' + dm.map(([w, v]) => '<button class="chip" data-aex="' + esc(q.replace(new RegExp(w, 'i'), v)) + '">' + esc(w) + ' → ' + esc(v) + '</button>').join('') + '</div>' : '<p>Prueba con otras palabras («borrar», «copiar», «volumen», «grabar») o busca en todas las máquinas.</p>') + '</div>';
-  }
-  return recHtml + html;
-}
 function viewGlosario(){
   return '<h1>Glosario · ' + esc(DEVS[state.dev].name) + '</h1><p class="lead">Los términos que aparecen en los atajos de esta máquina, explicados en pocas palabras. Entre paréntesis, el nombre que verás en la máquina o en el manual.</p>' +
     '<label class="vh" for="gq">Buscar en el glosario</label><input id="gq" class="search" type="search" placeholder="Buscar un término…" value="' + esc(state.gq) + '" autocomplete="off" style="margin-bottom:.8rem">' +
@@ -981,31 +1209,6 @@ function glist(items){
 }
 
 
-/* ---------- inicio, recetas, escenario ---------- */
-function mini(t){ return '<li><button class="mini" data-goto="' + t.id + '"><span class="combo">' + keycaps(t) + '</span><b>' + esc(t.action) + '</b></button></li>'; }
-function viewInicio(){
-  const L = tips(), byId = id => L.find(t => t.id === id);
-  let top = Object.entries(usage).map(([id, n]) => [byId(id), n]).filter(x => x[0]).sort((a, b) => b[1] - a[1]).slice(0, 5).map(x => x[0]);
-  const learned = top.length >= 3;
-  if (!learned) top = L.filter(t => t.tier === 'essential').slice(0, 5);
-  const rec = recent.map(byId).filter(Boolean).slice(0, 5);
-  const recs = RECIPES.filter(r => r.dev === state.dev);
-  return '<h1>' + esc(DEVS[state.dev].name) + '</h1><p class="lead">' + L.length + ' atajos · ' + recs.length + ' recetas. Empieza por aquí o pregúntale al asistente.</p>' +
-    '<div class="homeacts"><button class="btn pri" data-view="asistente">Preguntar al asistente</button><button class="btn" data-view="recetas">Ver recetas</button><button class="btn" data-view="atajos">Todos los atajos</button><button class="btn" data-stagesheet>Modo escenario (mi hoja)</button></div>' +
-    '<h2 class="sect">' + (learned ? 'Tus más usados' : 'Esenciales para empezar') + '</h2><ul class="minis">' + top.map(mini).join('') + '</ul>' +
-    (rec.length ? '<h2 class="sect">Vistos hace poco</h2><ul class="minis">' + rec.map(mini).join('') + '</ul>' : '') +
-    '<h2 class="sect">Recetas</h2><ul class="minis">' + recs.slice(0, 4).map(r => '<li><button class="mini" data-recipe="' + r.id + '"><b>' + esc(r.title) + '</b><small>' + esc(r.desc) + '</small></button></li>').join('') + '</ul>';
-}
-function viewRecetas(){
-  const recs = RECIPES.filter(r => r.dev === state.dev);
-  return '<h1>Recetas · ' + esc(DEVS[state.dev].name) + '</h1><p class="lead">Flujos completos paso a paso. Cada paso te lleva al atajo concreto.</p>' + recs.map(r => {
-    const open = state.recipeOpen === r.id ? ' open' : '';
-    return '<details class="rec" id="rec-' + r.id + '"' + open + '><summary><b>' + esc(r.title) + '</b><span>' + esc(r.desc) + '</span></summary><ol class="recsteps">' + r.steps.map(([id, note]) => {
-      const t = ALL.find(x => x.id === id); if (!t) return '';
-      return '<li><div class="combo">' + keycaps(t) + '</div><p>' + esc(note) + '</p><button class="btn" data-goto="' + id + '">Ver en el panel</button></li>';
-    }).join('') + '</ol><div class="row"><button class="btn pri" data-stagerec="' + r.id + '">Modo escenario</button><button class="btn" data-recpin="' + r.id + '">Fijar todos en Mi hoja</button></div></details>';
-  }).join('');
-}
 let stageW = null;
 function openStage(ids, i){
   ids = ids.filter(id => ALL.find(t => t.id === id)); if (!ids.length) return toast('No hay atajos para mostrar');
@@ -1018,7 +1221,7 @@ function stageDraw(){
   const S = state.stage; if (!S) return;
   const t = ALL.find(x => x.id === S.ids[S.i]);
   const dv = state.dev; state.dev = t.dev;
-  const keys = t.combo.map((c, i) => (i ? '<span class="pl">+</span>' : '') + '<kbd>' + esc(disp(c)) + '</kbd>').join('');
+  const keys = t.combo.map((c, i) => (i ? '<span class="pl">+</span>' : '') + capHtml(c, false)).join('');
   state.dev = dv;
   let el = $('#stage'); if (!el) { el = document.createElement('div'); el.id = 'stage'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-label', 'Modo escenario'); document.body.appendChild(el); }
   el.dataset.dev = t.dev;
@@ -1027,11 +1230,40 @@ function stageDraw(){
     '<div class="stnav"><button data-stagego="-1" aria-label="Anterior">◀</button><button data-stagego="1" aria-label="Siguiente">▶</button></div>';
 }
 
+/* ---------- recetas ---------- */
+function viewRecetas(){
+  const recs = RECIPES.filter(r => r.dev === state.dev);
+  return '<h1>Recetas · ' + esc(DEVS[state.dev].name) + '</h1><p class="lead">Flujos completos paso a paso. Toca un paso para ver cómo se hace y dónde está en la máquina.</p>' + recs.map(r => {
+    const open = state.recipeOpen === r.id ? ' open' : '';
+    return '<details class="rec" id="rec-' + r.id + '"' + open + '><summary><b>📋 ' + esc(r.title) + '</b><span>' + esc(r.desc) + ' · ' + r.steps.length + ' pasos</span></summary><ol class="recsteps">' + r.steps.map(([id, note]) => {
+      const t = ALL.find(x => x.id === id); if (!t) return '';
+      return '<li><button class="recstep" data-goto="' + id + '"><span class="combo">' + keycaps(t) + '</span><span>' + esc(note) + '</span><small>Ver cómo ›</small></button></li>';
+    }).join('') + '</ol><div class="row"><button class="btn pri" data-stagerec="' + r.id + '">🎤 Modo escenario</button><button class="btn" data-recpin="' + r.id + '">☆ Fijar todos en Mi hoja</button></div></details>';
+  }).join('');
+}
+/* ---------- acerca de (lo que antes era el pie de página) ---------- */
+function viewInfo(){
+  return '<h1>Acerca de Chuleta Beat</h1><p class="lead">Versión, novedades, fuentes de cada máquina, créditos y licencia.</p>';
+}
+
+/* ---------- elegir máquina ---------- */
+function openDevPick(){
+  closeDevPick();
+  const el = document.createElement('div'); el.id = 'devsheet'; el.setAttribute('role', 'dialog'); el.setAttribute('aria-modal', 'true'); el.setAttribute('aria-label', 'Elegir máquina');
+  el.innerHTML = '<div class="dsh small"><div class="dtop"><span>¿Qué máquina tienes delante?</span><button class="dx" data-devclose aria-label="Cerrar">✕</button></div>' + devTiles() + '</div>';
+  document.body.appendChild(el);
+  const b = el.querySelector('[aria-pressed=true]') || el.querySelector('.devtile'); if (b) b.focus();
+}
+function closeDevPick(){ const e = $('#devsheet'); if (e) e.remove(); }
+
 /* ---------- render ---------- */
+const VIEWS = ['buscar','maquina','recetas','mi-hoja','glosario','info'];
 function render() {
   const app = $('#app');
-  app.innerHTML = state.view === 'inicio' ? viewInicio() : state.view === 'recetas' ? viewRecetas() : state.view === 'mi-hoja' ? viewSheet() : state.view === 'glosario' ? viewGlosario() : state.view === 'asistente' ? viewAsistente() : viewAtajos();
-  document.querySelectorAll('nav [role=tab]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === state.view)));
+  const v = state.view;
+  app.innerHTML = v === 'recetas' ? viewRecetas() : v === 'mi-hoja' ? viewSheet() : v === 'glosario' ? viewGlosario() : v === 'info' ? viewInfo() : v === 'maquina' ? viewMaquina() : viewBuscar();
+  $('footer').hidden = v !== 'info';
+  document.body.dataset.view = v;
   update();
 }
 function toast(msg){
@@ -1039,12 +1271,20 @@ function toast(msg){
   setTimeout(() => t.remove(), 1800);
 }
 function setHash(){ const h = state.dev + '/' + state.view; try { history.replaceState(null, '', '#' + h); } catch (e) { try { location.hash = h; } catch (e2) {} } }
-function setView(v){ state.view = v; setHash(); render(); window.scrollTo(0, 0); }
-function setDev(d){
-  if (d === state.dev) return;
-  Object.assign(state, { dev:d, q:'', cat:'ALL', tier:'ALL', btns:[], sel:null, gq:'' });
+function setView(v){
+  if (state.detail) closeDetail();
+  state.view = v; state.hov = null;
+  if (v !== 'maquina') state.sel = null;
   setHash(); render(); window.scrollTo(0, 0);
 }
+function setDev(d){
+  LS.set('dev', d);
+  closeDevPick();
+  if (d === state.dev) { render(); return; }
+  Object.assign(state, { dev:d, q:'', cat:'ALL', tier:'ALL', btns:[], sel:null, hov:null, gq:'' });
+  setHash(); render(); window.scrollTo(0, 0);
+}
+
 function kit(spec){
   const [d, type] = spec.split(':');
   const L = ALL.filter(t => t.dev === d);
@@ -1056,43 +1296,48 @@ function kit(spec){
 }
 
 /* ---------- eventos ---------- */
-function selectCard(id){ state.sel = state.sel === id ? null : id; if (state.sel) touch(id); state.showFp = true; update(); }
+function refreshAfterNote(){ drawDetail(); if (state.view === 'mi-hoja') render(); else update(); }
 document.addEventListener('click', async e => {
+  if (e.target.id === 'detail') return closeDetail();          // tocar fuera de la hoja la cierra
+  if (e.target.id === 'devsheet') return closeDevPick();
   const el = e.target.closest('button');
   if (!el) {
     const art = e.target.closest('article.card');
-    if (art && state.view === 'atajos' && !e.target.closest('details,summary,a,textarea,.noteed')) selectCard(art.dataset.card);
+    if (art) openDetail(art.dataset.card);
     return;
   }
   const d = el.dataset;
   if (d.stageclose !== undefined) return closeStage();
   if (d.stagego) { const S = state.stage; if (S) { S.i = (S.i + Number(d.stagego) + S.ids.length) % S.ids.length; stageDraw(); } return; }
-  if (d.stage) { const L = state.view === 'atajos' ? filtered().map(t => t.id) : [d.stage]; return openStage(L.includes(d.stage) ? L : [d.stage], Math.max(0, L.indexOf(d.stage))); }
+  if (d.detclose !== undefined) return closeDetail();
+  if (d.devclose !== undefined) return closeDevPick();
+  if (d.devpick !== undefined) return openDevPick();
+  if (d.stage) { closeDetail(); return openStage([d.stage], 0); }
   if (d.stagesheet !== undefined) { const L = ALL.filter(t => t.dev === state.dev && pinned.has(t.id)).map(t => t.id); return L.length ? openStage(L, 0) : toast('Fija antes algún atajo con ☆'); }
   if (d.stagerec) { const r = RECIPES.find(x => x.id === d.stagerec); return r && openStage(r.steps.map(x => x[0]), 0); }
   if (d.recpin) { const r = RECIPES.find(x => x.id === d.recpin); r.steps.forEach(x => pinned.add(x[0])); savePins(); toast('Fijados en Mi hoja'); return update(); }
   if (d.recipe) { if (d.recdev && d.recdev !== state.dev) { Object.assign(state, { dev:d.recdev, q:'', cat:'ALL', tier:'ALL', btns:[], sel:null, gq:'' }); } state.recipeOpen = d.recipe; return setView('recetas'); }
-  if (d.note) { state.noteEd = d.note; return state.view === 'mi-hoja' ? render() : (state.view === 'asistente' ? ($('#aresults').innerHTML = aresults()) : update()); }
-  if (d.notecancel !== undefined) { state.noteEd = null; return state.view === 'mi-hoja' ? render() : (state.view === 'asistente' ? ($('#aresults').innerHTML = aresults()) : update()); }
-  if (d.notesave) { const v = ($('#ned') || {}).value || ''; if (v.trim()) notes[d.notesave] = v.trim(); else delete notes[d.notesave]; LS.set('notes', notes); state.noteEd = null; toast('Nota guardada'); return state.view === 'mi-hoja' ? render() : (state.view === 'asistente' ? ($('#aresults').innerHTML = aresults()) : update()); }
+  if (d.note) { state.noteEd = d.note; drawDetail(); const n = $('#ned'); if (n) n.focus(); return; }
+  if (d.notecancel !== undefined) { state.noteEd = null; return drawDetail(); }
+  if (d.notesave) { const v = ($('#ned') || {}).value || ''; if (v.trim()) notes[d.notesave] = v.trim(); else delete notes[d.notesave]; LS.set('notes', notes); state.noteEd = null; toast('Nota guardada'); return refreshAfterNote(); }
   if (d.print !== undefined) return window.print();
   if (d.dev) return setDev(d.dev);
   if (d.view) return setView(d.view);
-  if (d.pin) { pinned.has(d.pin) ? pinned.delete(d.pin) : (pinned.add(d.pin), touch(d.pin)); savePins(); return state.view === 'mi-hoja' ? render() : update(); }
-  if (d.cat !== undefined) { state.cat = (state.cat === d.cat && d.cat !== 'ALL') ? 'ALL' : d.cat; return update(); }
+  if (d.pin) { pinned.has(d.pin) ? pinned.delete(d.pin) : (pinned.add(d.pin), touch(d.pin)); savePins(); toast(pinned.has(d.pin) ? 'Fijado en Mi hoja' : 'Quitado de Mi hoja'); drawDetail(); return state.view === 'mi-hoja' ? render() : update(); }
+  if (d.shownew !== undefined) { state.cat = '__new'; update(); return window.scrollTo(0, 0); }
+  if (d.cat !== undefined) { state.cat = d.cat; state.tier = 'ALL'; state.hov = null; update(); return window.scrollTo(0, 0); }
   if (d.tier) { state.tier = d.tier; return update(); }
   if (d.btn) {
-    state.sel = null; state.btns = state.btns.includes(d.btn) ? state.btns.filter(b => b !== d.btn) : [...state.btns, d.btn]; update();
-    if (state.btns.length && window.matchMedia && matchMedia('(max-width:900px)').matches) { const r = $('#toolbar'); if (r && r.scrollIntoView) r.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' }); }
+    state.sel = null; state.btns = state.btns.includes(d.btn) ? state.btns.filter(b => b !== d.btn) : [...state.btns, d.btn]; syncAnim(); update();
+    if (state.btns.length && window.matchMedia && matchMedia('(max-width:999px)').matches) { const r = $('#explain'); if (r && r.scrollIntoView) r.scrollIntoView({ behavior: REDUCED ? 'auto' : 'smooth', block: 'start' }); }
     return;
   }
-  if (d.clearsel !== undefined) { state.sel = null; state.btns = []; return update(); }
-  if (d.thumb !== undefined) { state.thumb = !state.thumb; return update(); }
-  if (d.fptoggle !== undefined) { state.showFp = !state.showFp; return update(); }
-  if (d.reset !== undefined) { Object.assign(state, { q:'', cat:'ALL', tier:'ALL', btns:[], sel:null }); const q = $('#q'); if (q) q.value = ''; return update(); }
-  if (d.aex !== undefined) { state.aq = d.aex; const i = $('#aq'); if (i) i.value = d.aex; $('#aresults').innerHTML = aresults(); return; }
-  if (d.ascope) { state.ascope = d.ascope; return render(); }
-  if (d.goto) { const t = ALL.find(x => x.id === d.goto); if (!t) return; Object.assign(state, { dev:t.dev, view:'atajos', q:'', cat:'ALL', tier:'ALL', btns:[], sel:t.id, showFp:true }); touch(t.id); setHash(); render(); window.scrollTo(0, 0); return; }
+  if (d.clearsel !== undefined) { state.sel = null; state.btns = []; syncAnim(); return update(); }
+  if (d.thumb !== undefined) { state.thumb = !state.thumb; LS.set('thumb', state.thumb); return update(); }
+  if (d.aex !== undefined) { state.aq = d.aex; state.cat = 'ALL'; const i = $('#bq'); if (i) i.value = d.aex; saveSearch(d.aex); return update(); }
+  if (d.ascope) { state.ascope = d.ascope; document.querySelectorAll('[data-ascope]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.ascope === state.ascope))); return update(); }
+  if (d.goto) return openDetail(d.goto);
+  if (d.onfp) { const t = ALL.find(x => x.id === d.onfp); if (!t) return; closeDetail(); Object.assign(state, { dev:t.dev, view:'maquina', q:'', cat:'ALL', tier:'ALL', btns:[], sel:t.id, hov:null }); setHash(); render(); window.scrollTo(0, 0); return; }
   if (d.kit) return kit(d.kit);
   if (d.clear !== undefined) { if (!confirm('¿Vaciar tu hoja de estudio?')) return; pinned.clear(); savePins(); return render(); }
   if (d.copy !== undefined) {
@@ -1100,23 +1345,37 @@ document.addEventListener('click', async e => {
     catch (err) { toast('No se pudo copiar en este navegador'); }
   }
 });
+/* en el ordenador, al pasar el ratón por un resultado se ilumina en el panel de al lado */
+document.addEventListener('mouseover', e => {
+  if (state.view !== 'buscar' || state.detail) return;
+  const box = $('#fpbox'); if (!box || box.hidden) return;
+  const art = e.target.closest && e.target.closest('article.card'); if (!art || state.hov === art.dataset.card) return;
+  const t = ALL.find(x => x.id === art.dataset.card); if (!t || t.dev !== state.dev) return;
+  state.hov = t.id; box.innerHTML = fp(0);
+});
 document.addEventListener('keydown', e => {
   if (state.stage) { if (e.key === 'Escape') return closeStage(); if (e.key === 'ArrowRight') { state.stage.i = (state.stage.i + 1) % state.stage.ids.length; return stageDraw(); } if (e.key === 'ArrowLeft') { state.stage.i = (state.stage.i - 1 + state.stage.ids.length) % state.stage.ids.length; return stageDraw(); } }
-  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('article.card') && state.view === 'atajos') { e.preventDefault(); selectCard(e.target.dataset.card); }
+  if (e.key === 'Escape' && $('#devsheet')) return closeDevPick();
+  if (e.key === 'Escape' && state.detail) return closeDetail();
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.matches && e.target.matches('article.card')) { e.preventDefault(); openDetail(e.target.dataset.card); }
 });
 let tx0 = null;
 document.addEventListener('touchstart', e => { if (state.stage && e.touches[0]) tx0 = e.touches[0].clientX; }, { passive: true });
 document.addEventListener('touchend', e => { if (!state.stage || tx0 === null) return; const dx = (e.changedTouches[0] || {}).clientX - tx0; tx0 = null; if (Math.abs(dx) > 50) { const n = state.stage.ids.length; state.stage.i = (state.stage.i + (dx < 0 ? 1 : -1) + n) % n; stageDraw(); } }, { passive: true });
-document.addEventListener('change', e => { if (e.target.id === 'aq' && e.target.value.trim()) { searches = [e.target.value.trim(), ...searches.filter(x => x !== e.target.value.trim())].slice(0, 6); LS.set('searches', searches); } });
+function saveSearch(v){ v = (v || '').trim(); if (!v) return; searches = [v, ...searches.filter(x => x !== v)].slice(0, 6); LS.set('searches', searches); }
+document.addEventListener('change', e => { if (e.target.id === 'bq') saveSearch(e.target.value); });
 document.addEventListener('input', e => {
-  if (e.target.id === 'q') { state.q = e.target.value; update(); }
-  if (e.target.id === 'aq') { state.aq = e.target.value; $('#aresults').innerHTML = aresults(); }
+  if (e.target.id === 'bq') { state.aq = e.target.value; if (state.aq.trim()) state.cat = 'ALL'; state.hov = null; update(); }
   if (e.target.id === 'gq') { state.gq = e.target.value; $('#glist').innerHTML = glist(gitems()); }
 });
+document.addEventListener('keydown', e => { if (e.key === 'Enter' && e.target.id === 'bq') { saveSearch(e.target.value); e.target.blur(); } });
+window.addEventListener('resize', () => { if (state.view === 'buscar') update(); });
+const OLDVIEW = { inicio:'buscar', asistente:'buscar', atajos:'maquina' };
 function readHash(){
   const [d, v] = location.hash.slice(1).split('/');
   if (DEVS[d]) state.dev = d;
-  if (['inicio','atajos','recetas','mi-hoja','glosario','asistente'].includes(v)) state.view = v;
+  const vv = OLDVIEW[v] || v;
+  if (VIEWS.includes(vv)) state.view = vv;
 }
 window.addEventListener('hashchange', () => { const o = state.dev + state.view; readHash(); if (o !== state.dev + state.view) render(); });
 
@@ -1141,9 +1400,11 @@ if ('serviceWorker' in navigator) { try { navigator.serviceWorker.register('sw.j
 /* 1.3.4: menú común «☰ Menú» de todas las apps (sh-core 1.5.0); el botón «💾 Datos» pasa a estar dentro. */
 (function(){
   if(!window.SH||!SH.ui||!SH.ui.menu)return;
-  SH.report.install({me:'chuleta',version:'1.4.0'});
-  SH.ui.menu({me:'chuleta',version:'1.4.0',button:'auto',
-    guide:()=>{const b=document.getElementById('tab-inicio');if(b)b.click();window.scrollTo({top:0,behavior:'smooth'});},
+  SH.report.install({me:'chuleta',version:'1.5.0'});
+  SH.ui.menu({me:'chuleta',name:'Chuleta Beat',version:'1.5.0',button:'auto',
+    guide:()=>setView('buscar'),
+    ajustes:[{icon:'🎛',label:'Cambiar de máquina',run:()=>openDevPick()},{icon:'👍',label:()=>'Modo pulgares: '+(state.thumb?'activado':'desactivado'),hint:'Botones más grandes en el dibujo de la máquina',run:()=>{state.thumb=!state.thumb;LS.set('thumb',state.thumb);update();}}],
+    ayuda:[{icon:'📖',label:'Glosario',run:()=>setView('glosario')},{icon:'ℹ',label:'Acerca de, novedades y créditos',run:()=>setView('info')}],
     report:()=>SH.report.download('informe manual')});
 })();
 </script>
