@@ -1,7 +1,7 @@
 {
  "name": "Chuleta Beat: atajos de SP-404MKII, MPC Sample, Move y VE-22",
  "short_name": "Chuleta Beat",
- "description": "Atajos de cuatro máquinas en castellano, con panel visual, filtro por botones, hoja personal y glosario.",
+ "description": "Atajos de seis máquinas en castellano, con panel visual, filtro por botones, hoja personal y glosario.",
  "lang": "es",
  "start_url": "./",
  "scope": "./",
