@@ -1,7 +1,7 @@
 // Service worker de Chuleta Beat: guarda la página para usarla sin conexión.
 // Si cambias index.html, sube también el número de VERSION para que se actualice.
-const VERSION = 'chuleta-beat-v1.9.0-c1';
-const FILES = ['./', 'index.html', 'manifest.webmanifest', 'sh-core.js'];
+const VERSION = 'chuleta-beat-v1.9.1-c1';
+const FILES = ['./', 'index.html', 'manifest.webmanifest', 'sh-core.js', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-icon.png', 'favicon-32.png'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(VERSION).then((c) => c.addAll(FILES)).then(() => self.skipWaiting()));
